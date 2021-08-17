@@ -1,3 +1,4 @@
+// Default exports dont need names
 export default [
   {
     id: 1,
