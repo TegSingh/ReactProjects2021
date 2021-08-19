@@ -16,6 +16,7 @@ const Review = () => {
     setIndex(randomNumber)
   }
 
+
   return (
     <React.Fragment>
       <article className="review">
