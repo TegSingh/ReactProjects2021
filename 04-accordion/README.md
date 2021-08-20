@@ -18,3 +18,10 @@ const Component = () => {
   return <FaHome className='icon'></FaHome>;
 };
 ```
+
+Following is the list of things revised in the project
+1. State values
+2. Prop transferring
+3. React icons
+4. Object destructuring
+5. Conditional rendering
