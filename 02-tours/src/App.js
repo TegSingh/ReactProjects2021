@@ -15,6 +15,7 @@ function App() {
     const newTours = tours.filter((tour) => tour.id !== id);
     setTours(newTours);
   }
+
   // Following is an async await method
   const fetchTours = async () => {
     // Precaution to show the user that we are fetching the data
