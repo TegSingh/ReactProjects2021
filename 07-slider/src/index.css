@@ -156,6 +156,7 @@ Slider
   margin: 0 auto;
   margin-top: 4rem;
   width: 80vw;
+  /* have to have a height */
   height: 450px;
   max-width: 800px;
   text-align: center;
@@ -242,12 +243,15 @@ article {
   transition: var(--transition);
 }
 article.activeSlide {
+  /*Active slide to be displayed 100 percent*/
   opacity: 1;
   transform: translateX(0);
 }
 article.lastSlide {
+  /*Moved entirely to the left */
   transform: translateX(-100%);
 }
 article.nextSlide {
+  /*Moved entirely to the right*/
   transform: translateX(100%);
 }
