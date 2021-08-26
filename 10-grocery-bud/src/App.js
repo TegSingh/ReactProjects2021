@@ -2,12 +2,28 @@ import React, { useState, useEffect } from 'react'
 import List from './List'
 import Alert from './Alert'
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem('list');
+  if (list) {
+    return JSON.parse(localStorage.getItem('list'))
+  } else {
+    return [];
+  }
+}
+
 function App() {
   const [name, setName] = useState(''); // State to store the input of the form
-  const [list, setList] = useState([]); // State to store the list
+  const [list, setList] = useState(getLocalStorage()); // State to store the list
   const [isEditing, setIsEditing] = useState(false); // Flag to indicate that a value is being edited when a form is being filled
   const [editID, setEditID] = useState(null); // ID/index to update
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' }) // Alert to show item added/removed messages
+
+  // Set up local storage for the list object
+  useEffect(() => {
+    // Key value pairs
+    // Can only be stored as a string
+    localStorage.setItem('list', JSON.stringify(list));
+  }, [list]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
