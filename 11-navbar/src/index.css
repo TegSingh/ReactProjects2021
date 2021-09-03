@@ -125,7 +125,7 @@ p {
 .section {
   width: 90vw;
   margin: 0 auto;
-  max-width: var(--max-width);
+  max-width: var(--max-width); 
 }
 
 @media screen and (min-width: 992px) {
@@ -202,7 +202,7 @@ nav {
     padding: 0;
   }
   .nav-toggle {
-    display: none;
+    display: block;
   }
   .links-container {
     height: auto !important;

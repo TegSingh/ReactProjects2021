@@ -1,10 +1,12 @@
 import React from 'react'
+import { FaBaby, FaBars } from 'react-icons/fa'
 import Navbar from './Navbar'
+
 function App() {
   return (
-    <>
-      <h2>navbar project setup</h2>
-    </>
+    <React.Fragment>
+      <Navbar />
+    </React.Fragment>
   )
 }
 

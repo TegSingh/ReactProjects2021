@@ -4,20 +4,27 @@ import { links, social } from './data';
 import logo from './logo.svg';
 
 const Navbar = () => {
-  const [showLinks, setShowLinks] = useState(false);
+  const [showLinks, setShowLinks] = useState(true);
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
+
   const toggleLinks = () => {
+    console.log(showLinks)
     setShowLinks(!showLinks);
   };
+
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
+    console.log(linksRef.current)
+    console.log(linksHeight)
     if (showLinks) {
+      // update styling
       linksContainerRef.current.style.height = `${linksHeight}px`;
     } else {
       linksContainerRef.current.style.height = '0px';
     }
   }, [showLinks]);
+
   return (
     <nav>
       <div className='nav-center'>
@@ -27,18 +34,22 @@ const Navbar = () => {
             <FaBars />
           </button>
         </div>
-        <div className='links-container' ref={linksContainerRef}>
-          <ul className='links' ref={linksRef}>
-            {links.map((link) => {
-              const { id, url, text } = link;
-              return (
-                <li key={id}>
-                  <a href={url}>{text}</a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <React.Fragment>
+          <div className='links-container' ref={linksContainerRef}>
+            <ul className='links' ref={linksRef}>
+              {links.map((link) => {
+                const { id, url, text } = link;
+                if (showLinks) {
+                  return (
+                    <li key={id}>
+                      <a href={url}>{text}</a>
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+          </div>
+        </React.Fragment>
         <ul className='social-icons'>
           {social.map((socialIcon) => {
             const { id, url, icon } = socialIcon;
