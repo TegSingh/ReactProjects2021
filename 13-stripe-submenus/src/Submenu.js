@@ -19,6 +19,7 @@ const Submenu = () => {
     if (links.length === 3) {
       setColumn('col-3');
     }
+
     if (links.length > 3) {
       setColumn('col-4');
     }
