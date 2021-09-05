@@ -385,6 +385,7 @@ Stripe Styles
   border-radius: var(--radius);
   transition: var(--transition);
 }
+
 .submenu::before {
   content: '';
   display: block;
