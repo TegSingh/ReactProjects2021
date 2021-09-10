@@ -10,6 +10,7 @@ Following are the important features of this project
 **IMPORTANT:** The project uses template string to fetch/search for data from API
 7. **useRef** for uncontrolled input
 8. **UseParams** is used in conjunction with the React Router where it can access the parameter value from the url. The parameter value in the url is generally preceeded by colon
+9. **UseCallback:** Rerender if and only if the function in the hook changes
 
 #### React Router Fix
 (Fix)[https://dev.to/dance2die/page-not-found-on-netlify-with-react-router-58mc]

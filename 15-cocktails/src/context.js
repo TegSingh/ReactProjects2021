@@ -10,7 +10,7 @@ const AppProvider = ({ children }) => {
   const [cocktails, setCocktails] = useState([])
 
   // Use the Lookup cocktail by name url
-  const fetchDrinks = async () => {
+  const fetchDrinks = useCallback(async () => {
     setLoading(true);
     try {
       // Lookup functionality handled by this
@@ -43,11 +43,11 @@ const AppProvider = ({ children }) => {
       console.log(error);
       setLoading(false)
     }
-  }
+  })
 
   useEffect(() => {
     fetchDrinks()
-  }, [searchTerm])
+  }, [searchTerm, fetchDrinks])
 
 
   // The data passed as value to context provider can be accessed by any component

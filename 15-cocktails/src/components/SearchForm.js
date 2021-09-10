@@ -16,6 +16,7 @@ const SearchForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
+
   return (
     <React.Fragment>
       <section className="section search">
