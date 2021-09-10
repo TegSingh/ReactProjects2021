@@ -1,7 +1,8 @@
 import React from 'react'
 import { useGlobalContext } from './context'
 const Navbar = () => {
-  const { amount } = useGlobalContext()
+
+  const { amount } = useGlobalContext();
   return (
     <nav>
       <div className='nav-center'>

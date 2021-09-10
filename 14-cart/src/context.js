@@ -1,49 +1,62 @@
 import React, { useState, useContext, useReducer, useEffect } from 'react'
 import cartItems from './data'
 import reducer from './reducer'
-// ATTENTION!!!!!!!!!!
-// I SWITCHED TO PERMANENT DOMAIN
+
+
 const url = 'https://course-api.com/react-useReducer-cart-project'
 const AppContext = React.createContext()
 
+// Set an initial state which will be manipulated by the reducer function
+// Total is the added price and amount is the number of items in the cart
 const initialState = {
   loading: false,
   cart: cartItems,
   total: 0,
-  amount: 0,
+  amount: 0
 }
 
 const AppProvider = ({ children }) => {
+  // The useReducer hook uses the reducer method as the first argument and the initial state as the first argument
   const [state, dispatch] = useReducer(reducer, initialState)
-
-  const clearCart = () => {
-    dispatch({ type: 'CLEAR_CART' })
-  }
-  const remove = (id) => {
-    dispatch({ type: 'REMOVE', payload: id })
-  }
-  const increase = (id) => {
-    dispatch({ type: 'INCREASE', payload: id })
-  }
-  const decrease = (id) => {
-    dispatch({ type: 'DECREASE', payload: id })
-  }
-  const fetchData = async () => {
-    dispatch({ type: 'LOADING' })
-    const response = await fetch(url)
-    const cart = await response.json()
-    dispatch({ type: 'DISPLAY_ITEMS', payload: cart })
-  }
-  const toggleAmount = (id, type) => {
-    dispatch({ type: 'TOGGLE_AMOUNT', payload: { id, type } })
-  }
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   useEffect(() => {
     dispatch({ type: 'GET_TOTALS' })
   }, [state.cart])
+
+  // Method to dispatch actions
+  const clearCart = () => {
+    dispatch({ type: 'CLEAR_CART' })
+  }
+
+  // Calling dispatch method is a reference to reducer method 
+  const remove = (id) => {
+    dispatch({ type: 'REMOVE', payload: id })
+  }
+
+  // Method to increase the number of pieces of a particular cart item
+  const increase = (id) => {
+    dispatch({ type: 'INCREASE', payload: id })
+  }
+
+  // Method to decrease the number of pieces of particular cart item 
+  const decrease = (id) => {
+    dispatch({ type: 'DECREASE', payload: id })
+  }
+
+  const fetchData = async () => {
+    // Dispatch method to display loading when the code is fetching data from the url
+    dispatch({ type: 'LOADING' });
+    const response = await fetch(url);
+    const cart = await response.json();
+    // Dispatch method to display the data once fetched
+    dispatch({ type: 'DISPLAY', payload: cart });
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  // Pass all state values to the context method [not the setter methods]
   return (
     <AppContext.Provider
       value={{
@@ -51,8 +64,7 @@ const AppProvider = ({ children }) => {
         clearCart,
         remove,
         increase,
-        decrease,
-        toggleAmount,
+        decrease
       }}
     >
       {children}
