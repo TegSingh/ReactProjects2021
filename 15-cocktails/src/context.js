@@ -6,55 +6,60 @@ const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState('a')
+  const [searchTerm, setSearchTerm] = useState('a');
   const [cocktails, setCocktails] = useState([])
 
-  const fetchDrinks = useCallback( async () => {
-    setLoading(true)
+  // Use the Lookup cocktail by name url
+  const fetchDrinks = async () => {
+    setLoading(true);
     try {
+      // Lookup functionality handled by this
       const response = await fetch(`${url}${searchTerm}`)
-      const data = await response.json()
-      console.log(data);
-      const { drinks } = data
+      const data = await response.json();
+      const { drinks } = data;
       if (drinks) {
-        const newCocktails = drinks.map((item) => {
+        const newDrinks = drinks.map((item) => {
           const {
             idDrink,
             strDrink,
             strDrinkThumb,
             strAlcoholic,
-            strGlass,
-          } = item
-
+            strGlass
+          } = item;
           return {
             id: idDrink,
             name: strDrink,
             image: strDrinkThumb,
             info: strAlcoholic,
-            glass: strGlass,
+            glass: strGlass
           }
         })
-        setCocktails(newCocktails)
+        setCocktails(newDrinks)
       } else {
         setCocktails([])
       }
       setLoading(false)
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setLoading(false)
     }
-  },[searchTerm])
+  }
+
   useEffect(() => {
     fetchDrinks()
-  }, [searchTerm,fetchDrinks])
-  return (
-    <AppContext.Provider
-      value={{ loading, cocktails, searchTerm, setSearchTerm }}
-    >
-      {children}
-    </AppContext.Provider>
-  )
+  }, [searchTerm])
+
+
+  // The data passed as value to context provider can be accessed by any component
+  return <AppContext.Provider
+    value={{
+      loading,
+      searchTerm,
+      cocktails,
+      setSearchTerm
+    }}>{children}</AppContext.Provider>
 }
+
 // make sure use
 export const useGlobalContext = () => {
   return useContext(AppContext)
